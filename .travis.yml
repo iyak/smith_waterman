@@ -1,7 +1,6 @@
 language: cpp
 compiler:
-    - clang++
-    - g++
+    - clang++-3.7
 install:
     - ./waf distclean configure build
 addons:
@@ -12,7 +11,5 @@ addons:
       - llvm-toolchain-precise
     packages:
       - clang-3.7
-      - g++-5
-      - gcc-5
 script:
-    - ./sw
+    - ./sw ACGTT ACCGT
