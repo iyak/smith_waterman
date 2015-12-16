@@ -1,5 +1,5 @@
-#ifndef SMITH_WATERMAN__SMITH_WATERMAN__H
-#define SMITH_WATERMAN__SMITH_WATERMAN__H
+#ifndef SW__SMITH_WATERMAN__H
+#define SW__SMITH_WATERMAN__H
 #include <string>
 #include <vector>
 #include <iostream>
@@ -10,7 +10,7 @@ class sw::SmithWaterman{
   typedef std::vector<VI> VVI;
   string _seq1, _seq2;
   int _match, _mismatch;
-  VVI _sw_table, _trance_back;
+  VVI _sw_table, _trace_back;
  public:
   SmithWaterman(string seq1, string seq2, int match, int mismatch) {
     _match = match;
@@ -20,9 +20,9 @@ class sw::SmithWaterman{
     _sw_table.assign(_seq1.size()+1, VI(_seq2.size()+1, 0x80000000/* min int32 */));
     _sw_table[0].assign(_seq2.size()+1, 0);
     for (auto &t: _sw_table) t[0] = 0;
-    _trance_back.assign(_seq1.size()+1, VI(_seq2.size()+1, -1)); /* 0:\, 1:-, 2:| */
-    for (auto &c: _trance_back[0]) c=2;
-    for (auto &c: _trance_back) c[0]=1;
+    _trace_back.assign(_seq1.size()+1, VI(_seq2.size()+1, -1)); /* 0:\, 1:-, 2:| */
+    for (auto &c: _trace_back[0]) c=2;
+    for (auto &c: _trace_back) c[0]=1;
   }
   int run() {
     for (int i = 1; i <= _seq1.size(); ++ i) {
@@ -33,19 +33,19 @@ class sw::SmithWaterman{
         else score = _sw_table[i-1][j-1] - _mismatch;
         if (_sw_table[i][j] < score) {
           _sw_table[i][j] = score;
-          _trance_back[i][j] = 0;
+          _trace_back[i][j] = 0;
         }
         /* gap1 */
         score = _sw_table[i-1][j] - _mismatch;
         if (_sw_table[i][j] < score) {
           _sw_table[i][j] = score;
-          _trance_back[i][j] = 1;
+          _trace_back[i][j] = 1;
         }
         /* gap2 */
         score = _sw_table[i][j-1] - _mismatch;
         if (_sw_table[i][j] < score) {
           _sw_table[i][j] = score;
-          _trance_back[i][j] = 2;
+          _trace_back[i][j] = 2;
         }
       }
     }
@@ -54,7 +54,7 @@ class sw::SmithWaterman{
   void print_alignment() {
     string seq1="", seq2="";
     for (int i=_seq1.size(), j=_seq2.size(); 0!=i or 0!=j;) {
-      switch (_trance_back[i][j]) {
+      switch (_trace_back[i][j]) {
         case 0:
           seq1 = _seq1[i-1] + seq1;
           seq2 = _seq2[j-1] + seq2;
@@ -71,8 +71,8 @@ class sw::SmithWaterman{
           -- j;
           break;
         default:
-          std::cerr << "fail to trace-back: " << _trance_back[i][j] << "\n";
-          return;
+          std::cerr << "fail to trace-back: " << _trace_back[i][j] << "\n";
+          exit(1);
       }
     }
     std::cout << seq1 << std::endl << seq2 << std::endl;

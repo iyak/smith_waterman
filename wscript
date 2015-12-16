@@ -21,9 +21,9 @@ def test(bld):
 	bld.program(
 		features='test',
 		cxxflags='-std=c++11',
-		source=bld.path.ant_glob('src/test.cc'),
+		source='src/test.cc',
 		target='utests',
-		includes=['src'])
+		includes='src')
 
 	from waflib.Tools import waf_unit_test
 	bld.add_post_fun(waf_unit_test.summary)

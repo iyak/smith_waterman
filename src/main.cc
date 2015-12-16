@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[]) {
   ez::OptionParser option;
-  option.overview = "smith_waterman: Local alignment algorithm of two sequences.";
+  option.overview = "sw: Local alignment algorithm of two sequences.";
   option.add("seq1", true, 1, "Sequence 1", ez::EZ_TEXT);
   option.add("seq2", true, 1, "Sequence 2", ez::EZ_TEXT);
   option.add("-m,--match", false, 1, "Set match score", ez::EZ_INT32, "2", "0", "");
