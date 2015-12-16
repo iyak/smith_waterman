@@ -3,7 +3,7 @@ compiler:
     - clang++
     - g++
 install:
-    - ./waf distclean configure build install
+    - ./waf distclean configure build
 addons:
   apt:
     sources:
@@ -15,4 +15,4 @@ addons:
       - g++-5
       - gcc-5
 script:
-    - sw
+    - ./sw
