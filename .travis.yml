@@ -1,0 +1,3 @@
+language: cpp
+script:
+    - ./waf distclean configure build install && sw
