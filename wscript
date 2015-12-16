@@ -11,7 +11,7 @@ def configure(conf):
 	conf.check_tool("compiler_cxx")
 
 def build(bld):
-	bld(features="cxx cprogram",
+       bld(features="cxx cprogram",
     source="src/main.cc",
     cxxflags=["-O3","-Wall","-std=c++11"],
     target="sw",

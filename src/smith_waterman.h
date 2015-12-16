@@ -24,7 +24,7 @@ class sw::SmithWaterman{
     for (auto &c: _trance_back[0]) c=2;
     for (auto &c: _trance_back) c[0]=1;
   }
-  void run() {
+  int run() {
     for (int i = 1; i <= _seq1.size(); ++ i) {
       for (int j = 1; j <= _seq2.size(); ++ j) {
         int score;
@@ -49,6 +49,7 @@ class sw::SmithWaterman{
         }
       }
     }
+    return _sw_table[_seq1.size()][_seq2.size()];
   }
   void print_alignment() {
     string seq1="", seq2="";
