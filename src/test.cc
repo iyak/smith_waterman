@@ -12,6 +12,13 @@ int main() {
     cout << "ACGT - ACGT: " << score << " (correct: 4)" << endl;
     ++ fail;
   }
+  /* test 2 */
+  sw::SmithWaterman smith_waterman("TGCA", "TGCA", 1, 1);
+  int score;
+  if ((score = smith_waterman.run()) != 4) {
+    cout << "TGCA - TGCA: " << score << " (correct: 4)" << endl;
+    ++ fail;
+  }
 
   cout << fail << " test failed." << endl;
   if (0 < fail) {return 1;}
