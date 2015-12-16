@@ -1,7 +1,18 @@
-# smith_waterman
-smith waternman algorithm [for study]
+# Quick Start
+## Introduction
+This program is an implementation of smith-waterman algorithm.
 
-# usage
-``$ smith_waterman ACGT AGGT -m 2 -m 1``
+## Installation
+```
+$ git clone https://github.com/iyak/smith_waterman
+$ cd smith_waterman
+$ ./waf distclean configure build install
+```
 
-`-m, -match` set the match score and `-M, -mismatch` set the mismatch / gap penalty.
+## Usage
+```
+$ sw ACCGTT ACGTCA
+ACCGT-T
+A-CGTCA
+```
+`-m, --match` set the match score and `-M, --mismatch` set the mismatch / gap penalty.
