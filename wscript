@@ -1,23 +1,30 @@
-APPNAME = "sw" 
-VERSION = "1.0.0"
+APPNAME = "sw"
 
-srcdir = "src"
-blddir = "build"
+def options(opt):
+	opt.load('compiler_cxx waf_unit_test')
 
-def set_options(opt):
-	opt.tool_options("compiler_cxx")
-
-def configure(conf):
-	conf.check_tool("compiler_cxx")
+def configure(cgf):
+	cgf.load('compiler_cxx waf_unit_test')
 
 def build(bld):
-       bld(features="cxx cprogram",
-    source="src/main.cc",
-    cxxflags=["-O3","-Wall","-std=c++11"],
-    target="sw",
-    includes="src")
+	assemble_executable(bld)
+	test(bld)
 
-def shutdown(ctx):
-	pass
+def assemble_executable(bld):
+	bld.program(
+		cxxflags='-std=c++11',
+		source='src/main.cc', 
+		target=APPNAME,
+		includes='src')
 
+def test(bld):
+	bld.program(
+		features='test',
+		cxxflags='-std=c++11',
+		source=bld.path.ant_glob('src/test.cc'),
+		target='utests',
+		includes=['src'])
 
+	from waflib.Tools import waf_unit_test
+	bld.add_post_fun(waf_unit_test.summary)
+	bld.add_post_fun(waf_unit_test.set_exit_code)
