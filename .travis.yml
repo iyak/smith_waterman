@@ -1,3 +1,18 @@
 language: cpp
+compiler:
+    - clang++
+    - g++
+install:
+    - ./waf distclean configure build install
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.7
+      - llvm-toolchain-precise
+    packages:
+      - clang-3.7
+      - g++-5
+      - gcc-5
 script:
-    - ./waf distclean configure build install && sw
+    - sw
