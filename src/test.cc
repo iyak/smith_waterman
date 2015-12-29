@@ -18,8 +18,8 @@ int main() {
   {
     sw::SmithWaterman smith_waterman("TGCA", "TGCA", 1, 1);
     int score;
-    if ((score = smith_waterman.run()) != 4) {
-      cout << "TGCA - TGCA: " << score << " (correct: 4)" << endl;
+    if ((score = smith_waterman.run()) != 3) {
+      cout << "This test is supposed to be failed." << endl;
       ++ fail;
     }
   }
