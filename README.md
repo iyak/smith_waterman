@@ -1,5 +1,5 @@
 # Quick Start
-[![Build Status](https://travis-ci.org/iyak/smith_waterman.svg)](https://travis-ci.org/iyak/smith_waterman)
+[![Build Status](https://travis-ci.org/iyak/smith_waterman.svg?branch=master)](https://travis-ci.org/iyak/smith_waterman)
 ## Introduction
 This program is an implementation of smith-waterman algorithm.
 
